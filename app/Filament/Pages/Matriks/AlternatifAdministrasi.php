@@ -106,14 +106,14 @@ class AlternatifAdministrasi extends Page
     {
         foreach ($this->inputValues as $kiriId => $row) {
             foreach ($row as $atasId => $nilai) {
-                AlternatifAdministrasiModel::updateOrCreate(
+                AlternatifAdministrasiModel::updateOrCreateComparison(
                     [
                         'kiri_perusahaan_id' => $kiriId,
                         'atas_perusahaan_id' => $atasId,
                     ],
                     [
                         'nilai' => $nilai,
-                        'bobot' => $this->bobot,
+                        'bobot' => $this->bobot[$kiriId],
                     ]
                 );
             }
@@ -127,6 +127,4 @@ class AlternatifAdministrasi extends Page
         $this->calculateNormalizedValues();
         $this->calculateBobot();
     }
-
-
 }

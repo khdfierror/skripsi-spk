@@ -35,4 +35,15 @@ class AlternatifAdministrasi extends Model
             }
         });
     }
+
+    public static function updateOrCreateComparison($attributes, $values)
+    {
+        $model = static::where($attributes)->first();
+
+        if ($model) {
+            $model->update($values);
+        } else {
+            static::create(array_merge($attributes, $values));
+        }
+    }
 }
